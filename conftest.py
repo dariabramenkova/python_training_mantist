@@ -23,8 +23,10 @@ def app(request):
     global fixture
     browser=request.config.getoption("--browser")
     web_config = load_config(request.config.getoption("--target"))['web']
-    if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=web_config['base_url'])
+    #if fixture is None or not fixture.is_valid():
+    #    fixture = Application(browser=browser, base_url=web_config['base_url'])
+    soap_config = load_config(request.config.getoption("--target"))['soap']
+    fixture = Application(browser=browser, base_url=web_config['base_url'], soap_url=soap_config['soap_url'])
     return fixture
 
 
